@@ -173,9 +173,9 @@
                             <!-- Top -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Top</label>
-                                <input list="top_options" id="top" type="text" placeholder="light pastel blouse with puff sleeves under the hijab" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <input list="top_options" id="top" type="text" placeholder="light pastel blouse with puff sleeves under" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                                 <datalist id="top_options">
-                                    <option value="light pastel blouse with puff sleeves under the hijab">
+                                    <option value="light pastel blouse with puff sleeves under">
                                     <option value="fitted lace inner with sheer overlay">
                                     <option value="structured tailored blazer">
                                     <option value="flowy chiffon tunic">
@@ -387,21 +387,6 @@
                         <div class="mt-6">
                             <h3 class="text-lg font-medium mb-3 text-indigo-500">Movement</h3>
                             <div class="space-y-4 pl-4 border-l-2 border-indigo-200">
-                                <!-- Hijab Movement -->
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Hijab</label>
-                                    <input list="hijab_movement_options" id="hijab_movement" type="text" placeholder="slightly flowing in the breeze" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                                    <datalist id="hijab_movement_options">
-                                        <option value="slightly flowing in the breeze">
-                                        <option value="dramatically billowing as if in strong wind">
-                                        <option value="neatly pinned with no movement">
-                                        <option value="soft waves from gentle motion">
-                                        <option value="partially lifted as if caught mid-movement">
-                                        <option value="static with crisp folds">
-                                        <option value="flowing backward from forward motion">
-                                        <option value="delicate fluttering at the edges">
-                                    </datalist>
-                                </div>
                                 <!-- Skirt Movement -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Skirt</label>
@@ -609,7 +594,7 @@
                             "attire": {
                                 "headdress": document.getElementById('headdress').value || "silver, intricate floral motifs with delicate vertical elements",
                                 "jasmine": document.getElementById('jasmine').value || "artfully arranged strands encircling face and shoulders",
-                                "top": document.getElementById('top').value || "light pastel blouse with puff sleeves under the hijab",
+                                "top": document.getElementById('top').value || "light pastel blouse with puff sleeves under",
                                 "bottom": document.getElementById('bottom').value || "high-waisted pleated white skirt with silver accents",
                                 "accessories": document.getElementById('accessories').value || "minimalist silver jewelry",
                                 "makeup": document.getElementById('makeup').value || "soft natural look with well-groomed eyebrows, subtle eye makeup, peach lips and cheeks",
@@ -632,7 +617,6 @@
                             "weather": document.getElementById('weather').value || "warm, sunny day with gentle breeze",
                             "color_palette": colorPalette.length ? colorPalette : ["white", "silver", "pastel tones", "wood accents", "peach"],
                             "movement": {
-                                "hijab": document.getElementById('hijab_movement').value || "slightly flowing in the breeze",
                                 "skirt": document.getElementById('skirt_movement').value || "gentle movement from pleats"
                             }
                         },
