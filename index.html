@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prompt JSON Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    textarea {
+      font-family: monospace;
+      height: 300px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <h2 class="mb-4">Prompt JSON Generator</h2>
+    <form id="promptForm">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Age</label>
+          <input type="number" class="form-control" id="age" value="20">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Ethnicity</label>
+          <input type="text" class="form-control" id="ethnicity" value="Indonesian">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Expression</label>
+          <input type="text" class="form-control" id="expression" value="serene and confident smile">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Hijab Color</label>
+          <input type="text" class="form-control" id="hijabColor" value="white">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Headdress Description</label>
+          <input type="text" class="form-control" id="headdress" value="silver, intricate floral with towering vertical elements">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Makeup Description</label>
+          <input type="text" class="form-control" id="makeup" value="subtle eye makeup, peach lips, slight peach cheeks">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Dress Details</label>
+          <input type="text" class="form-control" id="dress" value="white, shimmering silver sequins and beads">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Background</label>
+          <input type="text" class="form-control" id="background" value="soft white mosquito net, orchids with vases">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Color Palette</label>
+          <input type="text" class="form-control" id="palette" value="white, silver, wood tones, peach">
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary mt-2" onclick="generateJSON()">Generate JSON</button>
+      <button type="button" class="btn btn-success mt-2 ms-2" onclick="copyJSON()">Copy to Clipboard</button>
+    </form>
+
+    <h4 class="mt-4">Generated JSON:</h4>
+    <textarea id="output" class="form-control" readonly></textarea>
+  </div>
+
+  <script>
+    function generateJSON() {
+      const json = {
+        prompt: "Create a high detailing image",
+        subject: {
+          age: parseInt(document.getElementById('age').value),
+          ethnicity: document.getElementById('ethnicity').value,
+          gender: "female",
+          expression: document.getElementById('expression').value,
+          attire: {
+            hijab: {
+              color: document.getElementById('hijabColor').value,
+              coverage: "fully covers hair"
+            },
+            headdress: {
+              type: document.getElementById('headdress').value
+            },
+            dress: {
+              description: document.getElementById('dress').value
+            },
+            makeup: document.getElementById('makeup').value
+          }
+        },
+        setting: {
+          background: document.getElementById('background').value,
+          color_palette: document.getElementById('palette').value.split(',').map(c => c.trim())
+        },
+        photography: {
+          style: "photorealistic, cinematic",
+          resolution: "high",
+          composition: {
+            type: "symmetrical and balanced",
+            framing: "centered",
+            ratio: "4:5"
+          }
+        }
+      };
+
+      document.getElementById('output').value = JSON.stringify(json, null, 2);
+    }
+
+    function copyJSON() {
+      const text = document.getElementById('output');
+      text.select();
+      text.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      alert("JSON copied to clipboard!");
+    }
+  </script>
+</body>
+</html>
