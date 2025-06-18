@@ -1,190 +1,699 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Prompt JSON Generator</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    textarea {
-      font-family: monospace;
-      height: 350px;
-    }
-  </style>
-</head>
-<body class="bg-light">
-  <div class="container mt-4 mb-5">
-    <h2 class="mb-4">Prompt JSON Generator - Wedding Portrait</h2>
-    <form id="promptForm">
-      <div class="row">
-        <!-- Age -->
-        <div class="col-md-3 mb-3">
-          <label class="form-label">Age</label>
-          <input type="number" class="form-control" id="age" value="20">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cinematic Image JSON Generator</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		
+		<!-- Open Graph / Facebook Meta Tags -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://fhahry.github.io/Gemini-Prompt-Generator/">
+		<meta property="og:title" content="Cinematic Image JSON Generator">
+		<meta property="og:description" content="Generate beautiful cinematic images with JSON configuration">
+		<meta property="og:image" content="https://fhahry.github.io/Gemini-Prompt-Generator/image.jpg">
+		
+		<!-- Twitter Meta Tags (optional) -->
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:title" content="Cinematic Image JSON Generator">
+		<meta name="twitter:description" content="Generate beautiful cinematic images with JSON configuration">
+		<meta name="twitter:image" content="https://fhahry.github.io/Gemini-Prompt-Generator/image.jpg">
+		
+		<!-- WhatsApp specific -->
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+	</head>
+	
+	
+    <body class="bg-gray-100 min-h-screen p-6">
+        <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
+            <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">Cinematic Image JSON Generator</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Subject Section -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h2 class="text-xl font-semibold mb-4 text-indigo-600 border-b pb-2">Subject Details</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Age</label>
+                            <input type="text" id="age" placeholder="young (early 20s)" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Ethnicity</label>
+                            <input type="text" id="ethnicity" placeholder="Indonesian" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Gender</label>
+                            <div class="mt-1 flex gap-4">
+                                <div class="flex items-center">
+                                    <input type="radio" id="gender_female" name="gender" value="female" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" checked>
+                                    <label for="gender_female" class="ml-2 block text-sm text-gray-700">Female</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="radio" id="gender_male" name="gender" value="male" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                    <label for="gender_male" class="ml-2 block text-sm text-gray-700">Male</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Skin Tone</label>
+                            <input list="skin_tone_options" id="skin_tone" type="text" placeholder="fair, glowing with natural radiance" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <datalist id="skin_tone_options">
+                                <option value="fair, glowing with natural radiance">
+                                <option value="light, porcelain">
+                                <option value="medium, warm beige">
+                                <option value="olive, golden undertones">
+                                <option value="tan, sun-kissed">
+                                <option value="deep, rich ebony">
+                                <option value="dark, mahogany">
+                                <option value="ivory, pale">
+                                <option value="honey, golden glow">
+                                <option value="caramel, smooth">
+                                <option value="cocoa, radiant">
+                                <option value="espresso, deep">
+                            </datalist>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Expression</label>
+                            <input list="expression_options" id="expression" type="text" placeholder="serene yet enchanting smile with subtle confidence" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <datalist id="expression_options">
+                                <option value="serene yet enchanting smile with subtle confidence">
+                                <option value="warm, genuine smile">
+                                <option value="playful smirk">
+                                <option value="mysterious half-smile">
+                                <option value="confident, direct gaze">
+                                <option value="soft, dreamy expression">
+                                <option value="intense, focused look">
+                                <option value="joyful, laughing expression">
+                                <option value="sophisticated, composed demeanor">
+                                <option value="flirtatious glance">
+                                <option value="thoughtful, pensive look">
+                                <option value="powerful, commanding presence">
+                                <option value="gentle, approachable smile">
+                                <option value="mischievous grin">
+                                <option value="serious, professional expression">
+                                <option value="vulnerable, emotional gaze">
+                            </datalist>
+                        </div>
+                        <!-- Eyes Field -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Eyes</label>
+                            <input list="eyes_options" id="eyes" type="text" placeholder="expressive, sparkling with youth and charm" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <datalist id="eyes_options">
+                                <option value="expressive, sparkling with youth and charm">
+                                <option value="bright, lively and engaging">
+                                <option value="deep, mysterious and alluring">
+                                <option value="sharp, focused and intense">
+                                <option value="soft, gentle and welcoming">
+                                <option value="playful, twinkling with mischief">
+                                <option value="dreamy, lost in thought">
+                                <option value="seductive, smoldering gaze">
+                                <option value="innocent, wide-eyed wonder">
+                                <option value="confident, direct eye contact">
+                                <option value="soulful, emotionally deep">
+                                <option value="alert, attentive and observant">
+                            </datalist>
+                        </div>
+                        <!-- Pose Field -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Pose</label>
+                            <input list="pose_options" id="pose" type="text" placeholder="slightly angled toward the camera with graceful posture" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <datalist id="pose_options">
+                                <option value="slightly angled toward the camera with graceful posture">
+                                <option value="facing camera directly with confident stance">
+                                <option value="casual lean against a surface">
+                                <option value="dynamic walking pose">
+                                <option value="seated with elegant leg cross">
+                                <option value="over-the-shoulder glance">
+                                <option value="arms crossed with powerful stance">
+                                <option value="playful twirl or mid-motion">
+                                <option value="thoughtful chin resting on hand">
+                                <option value="backlit silhouette pose">
+                                <option value="candid, natural movement">
+                                <option value="dramatic full-body stretch">
+                                <option value="intimate close-up upper body">
+                                <option value="action shot mid-activity">
+                            </datalist>
+                        </div>
+                    </div>
+                    <!-- Attire Subsection -->
+                    <div class="mt-6">
+                        <h3 class="text-lg font-medium mb-3 text-indigo-500">Attire</h3>
+                        <div class="space-y-4 pl-4 border-l-2 border-indigo-200">
+                            <!-- Headdress -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Headdress</label>
+                                <input list="headdress_options" id="headdress" type="text" placeholder="silver, intricate floral motifs with delicate vertical elements" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="headdress_options">
+                                    <option value="silver, intricate floral motifs with delicate vertical elements">
+                                    <option value="gold, traditional Javanese design">
+                                    <option value="crystal-encrusted contemporary headpiece">
+                                    <option value="minimalist metal hair cuff">
+                                    <option value="elaborate bridal headdress with pearls">
+                                    <option value="delicate chain headpiece">
+                                    <option value="cultural-inspired woven headband">
+                                    <option value="modern geometric hair accessory">
+                                </datalist>
+                            </div>
+                            <!-- Jasmine -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Jasmine</label>
+                                <input list="jasmine_options" id="jasmine" type="text" placeholder="artfully arranged strands encircling face and shoulders" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="jasmine_options">
+                                    <option value="artfully arranged strands encircling face and shoulders">
+                                    <option value="single strand behind the ear">
+                                    <option value="small cluster at the temple">
+                                    <option value="woven into braided hair">
+                                    <option value="scattered petals in hair">
+                                    <option value="thick garland around bun">
+                                    <option value="delicate chain with jasmine blossoms">
+                                    <option value="no jasmine accessories">
+                                </datalist>
+                            </div>
+                            <!-- Top -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Top</label>
+                                <input list="top_options" id="top" type="text" placeholder="light pastel blouse with puff sleeves under the hijab" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="top_options">
+                                    <option value="light pastel blouse with puff sleeves under the hijab">
+                                    <option value="fitted lace inner with sheer overlay">
+                                    <option value="structured tailored blazer">
+                                    <option value="flowy chiffon tunic">
+                                    <option value="embroidered traditional kebaya">
+                                    <option value="modern asymmetrical crop top">
+                                    <option value="silk camisole with delicate straps">
+                                    <option value="structured corset-style top">
+                                </datalist>
+                            </div>
+                            <!-- Bottom -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Bottom</label>
+                                <input list="bottom_options" id="bottom" type="text" placeholder="high-waisted pleated white skirt with silver accents" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="bottom_options">
+                                    <option value="high-waisted pleated white skirt with silver accents">
+                                    <option value="tailored wide-leg trousers">
+                                    <option value="flowy maxi skirt with slit">
+                                    <option value="pencil skirt with traditional batik">
+                                    <option value="denim jeans with embroidery">
+                                    <option value="layered tulle skirt">
+                                    <option value="structured leather skirt">
+                                    <option value="sarong-style wrapped skirt">
+                                </datalist>
+                            </div>
+                            <!-- Accessories -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Accessories</label>
+                                <input list="accessories_options" id="accessories" type="text" placeholder="minimalist silver jewelry" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="accessories_options">
+                                    <option value="minimalist silver jewelry">
+                                    <option value="statement gold necklace">
+                                    <option value="delicate layered chains">
+                                    <option value="chunky ethnic-inspired bangles">
+                                    <option value="pearl earrings and bracelet">
+                                    <option value="multiple finger rings">
+                                    <option value="waist chain with charms">
+                                    <option value="no additional accessories">
+                                </datalist>
+                            </div>
+                            <!-- Makeup -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Makeup</label>
+                                <input list="makeup_options" id="makeup" type="text" placeholder="soft natural look with well-groomed eyebrows, subtle eye makeup, peach lips and cheeks" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="makeup_options">
+                                    <option value="soft natural look with well-groomed eyebrows, subtle eye makeup, peach lips and cheeks">
+                                    <option value="glamorous full makeup with winged eyeliner">
+                                    <option value="dewy fresh-faced look">
+                                    <option value="smokey eye with nude lips">
+                                    <option value="bold lip with minimal eye makeup">
+                                    <option value="editorial graphic eyeliner">
+                                    <option value="natural no-makeup look">
+                                    <option value="colorful artistic makeup">
+                                </datalist>
+                            </div>
+                            <!-- Style -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Style</label>
+                                <input list="style_options" id="style" type="text" placeholder="elegant fusion of traditional and contemporary fashion" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="style_options">
+                                    <option value="elegant fusion of traditional and contemporary fashion">
+                                    <option value="modern minimalist aesthetic">
+                                    <option value="full traditional cultural attire">
+                                    <option value="streetwear-inspired look">
+                                    <option value="bohemian eclectic style">
+                                    <option value="high fashion editorial">
+                                    <option value="business professional">
+                                    <option value="romantic feminine style">
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hands Subsection -->
+                    <div class="mt-6">
+                        <h3 class="text-lg font-medium mb-3 text-indigo-500">Hands</h3>
+                        <div class="space-y-4 pl-4 border-l-2 border-indigo-200">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Left Hand</label>
+                                <input type="text" id="left_hand" placeholder="gently raised with fingers slightly splayed, soft pink nail art with white henna patterns" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Right Hand</label>
+                                <input type="text" id="right_hand" placeholder="holding a small Indomaret plastic bag in a natural manner" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Setting Section -->
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h2 class="text-xl font-semibold mb-4 text-indigo-600 border-b pb-2">Setting Details</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Location</label>
+                            <input type="text" id="location" placeholder="in front of Indomaret convenience store" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <!-- Background Subsection -->
+                        <div class="mt-6">
+                            <h3 class="text-lg font-medium mb-3 text-indigo-500">Background</h3>
+                            <div class="space-y-4 pl-4 border-l-2 border-indigo-200">
+                                <!-- Primary Background -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Primary</label>
+                                    <input list="primary_bg_options" id="primary_bg" type="text" placeholder="soft white mosquito net creating elegant framing" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                    <datalist id="primary_bg_options">
+                                        <option value="soft white mosquito net creating elegant framing">
+                                        <option value="blurred city skyline at dusk">
+                                        <option value="minimalist neutral-colored wall">
+                                        <option value="lush tropical greenery">
+                                        <option value="abstract bokeh light effects">
+                                        <option value="traditional batik fabric backdrop">
+                                        <option value="industrial urban textures">
+                                        <option value="soft gradient color wash">
+                                    </datalist>
+                                </div>
+                                <!-- Secondary Background -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Secondary</label>
+                                    <input list="secondary_bg_options" id="secondary_bg" type="text" placeholder="blurred Indomaret signage in red, blue and yellow" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                    <datalist id="secondary_bg_options">
+                                        <option value="blurred Indomaret signage in red, blue and yellow">
+                                        <option value="subtle traditional market scene">
+                                        <option value="vintage architectural elements">
+                                        <option value="reflections in glass surfaces">
+                                        <option value="crowd of people out of focus">
+                                        <option value="neon sign glow">
+                                        <option value="sunlight filtering through trees">
+                                        <option value="abstract geometric patterns">
+                                    </datalist>
+                                </div>
+                                <!-- Decor -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Decor</label>
+                                    <input list="decor_options" id="decor" type="text" placeholder="orchids in minimalist vases arranged tastefully" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                    <datalist id="decor_options">
+                                        <option value="orchids in minimalist vases arranged tastefully">
+                                        <option value="scattered flower petals on surface">
+                                        <option value="antique brass candle holders">
+                                        <option value="stacked vintage books">
+                                        <option value="modern sculptural pieces">
+                                        <option value="traditional Indonesian artifacts">
+                                        <option value="floating shelves with plants">
+                                        <option value="artisanal woven baskets">
+                                    </datalist>
+                                </div>
+                                <!-- Environment -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Environment</label>
+                                    <input list="environment_options" id="environment" type="text" placeholder="urban Indonesian vibe with cultural elements" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                    <datalist id="environment_options">
+                                        <option value="urban Indonesian vibe with cultural elements">
+                                        <option value="contemporary studio setting">
+                                        <option value="traditional Javanese courtyard">
+                                        <option value="coffee shop interior">
+                                        <option value="luxury hotel lobby">
+                                        <option value="beachside at golden hour">
+                                        <option value="rainforest clearing">
+                                        <option value="modern apartment balcony">
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Lighting -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Lighting</label>
+                            <input list="lighting_options" id="lighting" type="text" placeholder="natural lighting with cinematic softness and even illumination" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <datalist id="lighting_options">
+                                <option value="natural lighting with cinematic softness and even illumination">
+                                <option value="dramatic side lighting with shadows">
+                                <option value="soft window light diffused by curtains">
+                                <option value="golden hour sunlight">
+                                <option value="moody low-key lighting">
+                                <option value="studio strobes with softboxes">
+                                <option value="neon and artificial light mix">
+                                <option value="candlelit ambiance">
+                            </datalist>
+                        </div>
+                        <!-- Weather -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Weather</label>
+                            <input list="weather_options" id="weather" type="text" placeholder="warm, sunny day with gentle breeze" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <datalist id="weather_options">
+                                <option value="warm, sunny day with gentle breeze">
+                                <option value="overcast with diffused light">
+                                <option value="light rain creating reflections">
+                                <option value="foggy morning atmosphere">
+                                <option value="stormy with dramatic clouds">
+                                <option value="crisp autumn day">
+                                <option value="hot and humid tropical weather">
+                                <option value="cool evening with sunset colors">
+                            </datalist>
+                        </div>
+                        <!-- Color Palette -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Color Palette (comma separated)</label>
+                            <input list="color_palette_options" id="color_palette" type="text" placeholder="white, silver, pastel tones, wood accents, peach" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            <datalist id="color_palette_options">
+                                <option value="white, silver, pastel tones, wood accents, peach">
+                                <option value="earth tones, terracotta, cream, olive green">
+                                <option value="monochrome black and white with gray accents">
+                                <option value="jewel tones - emerald, sapphire, ruby">
+                                <option value="neutral beige, taupe, ivory, soft brown">
+                                <option value="bold primary colors - red, blue, yellow">
+                                <option value="cool tones - ice blue, mint, lavender">
+                                <option value="warm tones - gold, burnt orange, deep red">
+                                <option value="metallic - gold, bronze, copper">
+                                <option value="high contrast - black, white, neon accents">
+                            </datalist>
+                        </div>
+                        <!-- Movement Subsection -->
+                        <div class="mt-6">
+                            <h3 class="text-lg font-medium mb-3 text-indigo-500">Movement</h3>
+                            <div class="space-y-4 pl-4 border-l-2 border-indigo-200">
+                                <!-- Hijab Movement -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Hijab</label>
+                                    <input list="hijab_movement_options" id="hijab_movement" type="text" placeholder="slightly flowing in the breeze" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                    <datalist id="hijab_movement_options">
+                                        <option value="slightly flowing in the breeze">
+                                        <option value="dramatically billowing as if in strong wind">
+                                        <option value="neatly pinned with no movement">
+                                        <option value="soft waves from gentle motion">
+                                        <option value="partially lifted as if caught mid-movement">
+                                        <option value="static with crisp folds">
+                                        <option value="flowing backward from forward motion">
+                                        <option value="delicate fluttering at the edges">
+                                    </datalist>
+                                </div>
+                                <!-- Skirt Movement -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Skirt</label>
+                                    <input list="skirt_movement_options" id="skirt_movement" type="text" placeholder="gentle movement from pleats" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                    <datalist id="skirt_movement_options">
+                                        <option value="gentle movement from pleats">
+                                        <option value="dramatic swirling motion">
+                                        <option value="static with crisp pleats">
+                                        <option value="flowing from walking movement">
+                                        <option value="slightly lifted at one side">
+                                        <option value="bouncing from jumping motion">
+                                        <option value="wrapped tightly around legs">
+                                        <option value="billowing in strong wind">
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Photography Section -->
+                    <div class="mt-8">
+                        <h2 class="text-xl font-semibold mb-4 text-indigo-600 border-b pb-2">Photography Details</h2>
+                        <div class="space-y-4">
+                            <!-- Style -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Style</label>
+                                <input list="photo_style_options" id="photo_style" type="text" placeholder="ultra-realistic photorealistic with cinematic fashion aesthetic" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="photo_style_options">
+                                    <option value="ultra-realistic photorealistic with cinematic fashion aesthetic">
+                                    <option value="documentary style with natural feel">
+                                    <option value="high fashion editorial look">
+                                    <option value="vintage film grain aesthetic">
+                                    <option value="minimalist clean style">
+                                    <option value="dramatic chiaroscuro lighting">
+                                    <option value="soft dreamy ethereal style">
+                                    <option value="urban street photography vibe">
+                                </datalist>
+                            </div>
+                            <!-- Resolution -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Resolution</label>
+                                <input list="resolution_options" id="resolution" type="text" placeholder="ultra-high definition" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="resolution_options">
+                                    <option value="ultra-high definition">
+                                    <option value="8K resolution">
+                                    <option value="4K cinematic quality">
+                                    <option value="high resolution with fine details">
+                                    <option value="medium resolution with soft focus">
+                                    <option value="vintage low-resolution effect">
+                                    <option value="sharp 35mm film quality">
+                                    <option value="digital medium format quality">
+                                </datalist>
+                            </div>
+                            <!-- Framing -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Framing</label>
+                                <input list="framing_options" id="framing" type="text" placeholder="vertical composition with centered subject" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="framing_options">
+                                    <option value="vertical composition with centered subject">
+                                    <option value="horizontal landscape framing">
+                                    <option value="diagonal dynamic composition">
+                                    <option value="close-up portrait framing">
+                                    <option value="full-body environmental framing">
+                                    <option value="wide-angle expansive view">
+                                    <option value="tight crop with negative space">
+                                    <option value="rule of thirds composition">
+                                </datalist>
+                            </div>
+                            <!-- Composition Subsection -->
+                            <div class="mt-6">
+                                <h3 class="text-lg font-medium mb-3 text-indigo-500">Composition</h3>
+                                <div class="space-y-4 pl-4 border-l-2 border-indigo-200">
+                                    <!-- Composition Type -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Type</label>
+                                        <input list="composition_type_options" id="composition_type" type="text" placeholder="symmetrical yet dynamic" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                        <datalist id="composition_type_options">
+                                            <option value="symmetrical yet dynamic">
+                                            <option value="balanced and harmonious">
+                                            <option value="asymmetrical with tension">
+                                            <option value="leading lines drawing focus">
+                                            <option value="layered depth composition">
+                                            <option value="minimalist with negative space">
+                                            <option value="complex multi-element">
+                                            <option value="organic and flowing">
+                                        </datalist>
+                                    </div>
+                                    <!-- Composition Ratio -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Ratio</label>
+                                        <input list="composition_ratio_options" id="composition_ratio" type="text" placeholder="4:5" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                        <datalist id="composition_ratio_options">
+                                            <option value="4:5">
+                                            <option value="3:2">
+                                            <option value="16:9">
+                                            <option value="1:1 square">
+                                            <option value="2.35:1 cinematic">
+                                            <option value="9:16 vertical">
+                                            <option value="5:7">
+                                            <option value="custom aspect ratio">
+                                        </datalist>
+                                    </div>
+                                    <!-- Composition Focus -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700">Focus</label>
+                                        <input list="composition_focus_options" id="composition_focus" type="text" placeholder="face and upper body sharply detailed with gradual bokeh toward lower body" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                        <datalist id="composition_focus_options">
+                                            <option value="face and upper body sharply detailed with gradual bokeh toward lower body">
+                                            <option value="sharp throughout with deep depth of field">
+                                            <option value="selective focus on eyes only">
+                                            <option value="foreground in focus with blurred background">
+                                            <option value="tilt-shift selective focus">
+                                            <option value="soft focus throughout">
+                                            <option value="multiple focus points">
+                                            <option value="rack focus between elements">
+                                        </datalist>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Depth of Field -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Depth of Field</label>
+                                <input list="dof_options" id="dof" type="text" placeholder="shallow (razor-sharp focus on subject with creamy background bokeh)" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="dof_options">
+                                    <option value="shallow (razor-sharp focus on subject with creamy background bokeh)">
+                                    <option value="medium (subject and immediate surroundings in focus)">
+                                    <option value="deep (everything from foreground to background sharp)">
+                                    <option value="very shallow (only eyes in focus)">
+                                    <option value="selective (specific elements in focus)">
+                                    <option value="tilt-shift (miniature effect)">
+                                    <option value="variable (changing through frame)">
+                                    <option value="soft focus throughout">
+                                </datalist>
+                            </div>
+                            <!-- Mood -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Mood</label>
+                                <input list="mood_options" id="mood" type="text" placeholder="elegant, culturally rich, fashionable yet approachable, cinematic everyday beauty" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <datalist id="mood_options">
+                                    <option value="elegant, culturally rich, fashionable yet approachable, cinematic everyday beauty">
+                                    <option value="dark and moody with dramatic tension">
+                                    <option value="light and airy joyful atmosphere">
+                                    <option value="romantic and dreamy">
+                                    <option value="edgy and urban">
+                                    <option value="nostalgic vintage feel">
+                                    <option value="futuristic and sleek">
+                                    <option value="natural and authentic">
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Art Direction Section -->
+                    <div class="mt-8">
+                        <h2 class="text-xl font-semibold mb-4 text-indigo-600 border-b pb-2">Art Direction</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Theme</label>
+                                <input type="text" id="theme" placeholder="Modern Indonesian femininity" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Keywords (comma separated)</label>
+                                <input type="text" id="keywords" placeholder="graceful, radiant, culturally grounded, fashion-forward, cinematic realism" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Action Buttons -->
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <button id="generateBtn" class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Generate JSON
+            </button>
+                <button id="copyBtn" class="px-6 py-3 bg-green-600 text-white font-medium rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Copy to Clipboard
+            </button>
+                <button id="resetBtn" class="px-6 py-3 bg-gray-600 text-white font-medium rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Reset Form
+            </button>
+            </div>
+            <!-- JSON Output -->
+            <div class="mt-8">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Generated JSON</label>
+                <pre id="jsonOutput" class="bg-gray-800 text-green-400 p-4 rounded-md overflow-auto max-h-96"></pre>
+            </div>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const generateBtn = document.getElementById('generateBtn');
+                const copyBtn = document.getElementById('copyBtn');
+                const resetBtn = document.getElementById('resetBtn');
+                const jsonOutput = document.getElementById('jsonOutput');
 
-        <!-- Gender -->
-        <div class="col-md-3 mb-3">
-          <label class="form-label">Gender</label>
-          <select class="form-select" id="gender">
-            <option selected>female</option>
-            <option>male</option>
-            <option>other</option>
-          </select>
-        </div>
+                // Generate JSON
+                generateBtn.addEventListener('click', function() {
+                    const colorPalette = document.getElementById('color_palette').value.split(',').map(item => item.trim()).filter(item => item);
 
-        <!-- Ethnicity -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Ethnicity</label>
-          <input type="text" class="form-control" id="ethnicity" value="Indonesian">
-        </div>
+                    const keywords = document.getElementById('keywords').value.split(',').map(item => item.trim()).filter(item => item);
 
-        <!-- Expression -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Expression</label>
-          <input type="text" class="form-control" id="expression" value="serene and confident smile">
-        </div>
+                    const jsonData = {
+                        "prompt": "Create an ultra-realistic, cinematic fashion-lifestyle image with high detailing",
+                        "subject": {
+                            "age": document.getElementById('age').value || "young (early 20s)",
+                            "ethnicity": document.getElementById('ethnicity').value || "Indonesian",
+                            "gender": document.querySelector('input[name="gender"]:checked').value || "female",
+                            "skin_tone": document.getElementById('skin_tone').value || "fair, glowing with natural radiance",
+                            "expression": document.getElementById('expression').value || "serene yet enchanting smile with subtle confidence",
+                            "eyes": document.getElementById('eyes').value || "expressive, sparkling with youth and charm",
+                            "pose": document.getElementById('pose').value || "slightly angled toward the camera with graceful posture",
+                            "attire": {
+                                "headdress": document.getElementById('headdress').value || "silver, intricate floral motifs with delicate vertical elements",
+                                "jasmine": document.getElementById('jasmine').value || "artfully arranged strands encircling face and shoulders",
+                                "top": document.getElementById('top').value || "light pastel blouse with puff sleeves under the hijab",
+                                "bottom": document.getElementById('bottom').value || "high-waisted pleated white skirt with silver accents",
+                                "accessories": document.getElementById('accessories').value || "minimalist silver jewelry",
+                                "makeup": document.getElementById('makeup').value || "soft natural look with well-groomed eyebrows, subtle eye makeup, peach lips and cheeks",
+                                "style": document.getElementById('style').value || "elegant fusion of traditional and contemporary fashion"
+                            },
+                            "hands": {
+                                "left": document.getElementById('left_hand').value || "gently raised with fingers slightly splayed, soft pink nail art with white henna patterns",
+                                "right": document.getElementById('right_hand').value || "holding a small Indomaret plastic bag in a natural manner"
+                            }
+                        },
+                        "setting": {
+                            "location": document.getElementById('location').value || "in front of Indomaret convenience store",
+                            "background": {
+                                "primary": document.getElementById('primary_bg').value || "soft white mosquito net creating elegant framing",
+                                "secondary": document.getElementById('secondary_bg').value || "blurred Indomaret signage in red, blue and yellow",
+                                "decor": document.getElementById('decor').value || "orchids in minimalist vases arranged tastefully",
+                                "environment": document.getElementById('environment').value || "urban Indonesian vibe with cultural elements"
+                            },
+                            "lighting": document.getElementById('lighting').value || "natural lighting with cinematic softness and even illumination",
+                            "weather": document.getElementById('weather').value || "warm, sunny day with gentle breeze",
+                            "color_palette": colorPalette.length ? colorPalette : ["white", "silver", "pastel tones", "wood accents", "peach"],
+                            "movement": {
+                                "hijab": document.getElementById('hijab_movement').value || "slightly flowing in the breeze",
+                                "skirt": document.getElementById('skirt_movement').value || "gentle movement from pleats"
+                            }
+                        },
+                        "photography": {
+                            "style": document.getElementById('photo_style').value || "ultra-realistic photorealistic with cinematic fashion aesthetic",
+                            "resolution": document.getElementById('resolution').value || "ultra-high definition",
+                            "framing": document.getElementById('framing').value || "vertical composition with centered subject",
+                            "composition": {
+                                "type": document.getElementById('composition_type').value || "symmetrical yet dynamic",
+                                "ratio": document.getElementById('composition_ratio').value || "4:5",
+                                "focus": document.getElementById('composition_focus').value || "face and upper body sharply detailed with gradual bokeh toward lower body"
+                            },
+                            "depth_of_field": document.getElementById('dof').value || "shallow (razor-sharp focus on subject with creamy background bokeh)",
+                            "mood": document.getElementById('mood').value || "elegant, culturally rich, fashionable yet approachable, cinematic everyday beauty"
+                        },
+                        "art_direction": {
+                            "theme": document.getElementById('theme').value || "Modern Indonesian femininity",
+                            "key_words": keywords.length ? keywords : ["graceful", "radiant", "culturally grounded", "fashion-forward", "cinematic realism"]
+                        }
+                    };
 
-        <!-- Skin Tone -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Skin Tone</label>
-          <select class="form-select" id="skinTone">
-            <option selected>fair</option>
-            <option>tan</option>
-            <option>olive</option>
-            <option>dark</option>
-            <option value="custom">Other</option>
-          </select>
-          <input type="text" class="form-control mt-2 d-none" id="customSkinTone" placeholder="Custom skin tone">
-        </div>
+                    jsonOutput.textContent = JSON.stringify(jsonData, null, 2);
+                });
 
-        <!-- Pose Description -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Pose / Viewpoint</label>
-          <input type="text" class="form-control" id="pose" value="slightly from the side">
-        </div>
+                // Copy to Clipboard
+                copyBtn.addEventListener('click', function() {
+                    if (!jsonOutput.textContent) {
+                        alert('Please generate JSON first!');
+                        return;
+                    }
 
-        <!-- Hijab -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Hijab Description</label>
-          <input type="text" class="form-control" id="hijab" value="white, fully covers hair">
-        </div>
+                    navigator.clipboard.writeText(jsonOutput.textContent).then( () => {
+                        const originalText = copyBtn.textContent;
+                        copyBtn.textContent = 'Copied!';
+                        copyBtn.classList.remove('bg-green-600');
+                        copyBtn.classList.add('bg-green-700');
 
-        <!-- Headdress -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Headdress</label>
-          <input type="text" class="form-control" id="headdress" value="silver, intricate floral with towering vertical elements">
-        </div>
+                        setTimeout( () => {
+                            copyBtn.textContent = originalText;
+                            copyBtn.classList.remove('bg-green-700');
+                            copyBtn.classList.add('bg-green-600');
+                        }
+                        , 2000);
+                    }
+                    ).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        alert('Failed to copy to clipboard');
+                    }
+                    );
+                });
 
-        <!-- Jasmine -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Jasmine Decoration</label>
-          <input type="text" class="form-control" id="jasmine" value="strands encircling face and shoulders">
-        </div>
-
-        <!-- Dress -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Dress Description</label>
-          <input type="text" class="form-control" id="dress" value="white dress with silver sequins and beads">
-        </div>
-
-        <!-- Makeup -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Makeup Details</label>
-          <input type="text" class="form-control" id="makeup" value="well groomed eyebrows, subtle eye makeup, peach lips, peach cheeks">
-        </div>
-
-        <!-- Hand Description -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Hand Position & Decoration</label>
-          <input type="text" class="form-control" id="hand" value="left hand raised, fingers slightly splayed, soft pink nail art, white henna, touching white wall">
-        </div>
-
-        <!-- Background -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Background Elements</label>
-          <input type="text" class="form-control" id="background" value="soft white mosquito net, orchids with vases">
-        </div>
-
-        <!-- Lighting -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Lighting</label>
-          <input type="text" class="form-control" id="lighting" value="soft and even">
-        </div>
-
-        <!-- Color Palette -->
-        <div class="col-md-6 mb-3">
-          <label class="form-label">Color Palette (comma separated)</label>
-          <input type="text" class="form-control" id="palette" value="white, silver, wood tones, peach">
-        </div>
-      </div>
-
-      <!-- Generate & Copy Buttons -->
-      <button type="button" class="btn btn-primary mt-2" onclick="generateJSON()">Generate JSON</button>
-      <button type="button" class="btn btn-success mt-2 ms-2" onclick="copyJSON()">Copy to Clipboard</button>
-    </form>
-
-    <!-- Output -->
-    <h4 class="mt-4">Generated JSON:</h4>
-    <textarea id="output" class="form-control" readonly></textarea>
-  </div>
-
-  <script>
-    // Show custom skin tone input if "Other" selected
-    document.getElementById('skinTone').addEventListener('change', function () {
-      const customInput = document.getElementById('customSkinTone');
-      customInput.classList.toggle('d-none', this.value !== 'custom');
-    });
-
-    function generateJSON() {
-      const skinTone = document.getElementById('skinTone').value === 'custom'
-        ? document.getElementById('customSkinTone').value
-        : document.getElementById('skinTone').value;
-
-      const json = {
-        prompt: "Create a high detailing image",
-        subject: {
-          age: parseInt(document.getElementById('age').value),
-          ethnicity: document.getElementById('ethnicity').value,
-          gender: document.getElementById('gender').value,
-          skin_tone: skinTone,
-          expression: document.getElementById('expression').value,
-          pose: document.getElementById('pose').value,
-          attire: {
-            hijab: document.getElementById('hijab').value,
-            headdress: document.getElementById('headdress').value,
-            jasmine: document.getElementById('jasmine').value,
-            dress: document.getElementById('dress').value,
-            makeup: document.getElementById('makeup').value
-          },
-          hands: document.getElementById('hand').value
-        },
-        setting: {
-          background: document.getElementById('background').value,
-          lighting: document.getElementById('lighting').value,
-          color_palette: document.getElementById('palette').value.split(',').map(c => c.trim())
-        },
-        photography: {
-          style: "photorealistic, cinematic",
-          resolution: "high",
-          depth_of_field: "shallow (sharp face, soft bokeh background)",
-          composition: {
-            type: "symmetrical and balanced",
-            framing: "centered",
-            ratio: "4:5"
-          }
-        }
-      };
-
-      document.getElementById('output').value = JSON.stringify(json, null, 2);
-    }
-
-    function copyJSON() {
-      const text = document.getElementById('output');
-      text.select();
-      text.setSelectionRange(0, 99999);
-      document.execCommand('copy');
-      alert("✅ JSON copied to clipboard!");
-    }
-  </script>
-</body>
+                // Reset Form
+                resetBtn.addEventListener('click', function() {
+                    const inputs = document.querySelectorAll('input[type="text"]');
+                    inputs.forEach(input => {
+                        input.value = '';
+                    }
+                    );
+                    jsonOutput.textContent = '';
+                });
+            });
+        </script>
+    </body>
 </html>
