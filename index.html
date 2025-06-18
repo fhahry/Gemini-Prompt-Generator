@@ -7,91 +7,166 @@
   <style>
     textarea {
       font-family: monospace;
-      height: 300px;
+      height: 350px;
     }
   </style>
 </head>
 <body class="bg-light">
-  <div class="container mt-5">
-    <h2 class="mb-4">Prompt JSON Generator</h2>
+  <div class="container mt-4 mb-5">
+    <h2 class="mb-4">Prompt JSON Generator - Wedding Portrait</h2>
     <form id="promptForm">
       <div class="row">
-        <div class="col-md-6 mb-3">
+        <!-- Age -->
+        <div class="col-md-3 mb-3">
           <label class="form-label">Age</label>
           <input type="number" class="form-control" id="age" value="20">
         </div>
+
+        <!-- Gender -->
+        <div class="col-md-3 mb-3">
+          <label class="form-label">Gender</label>
+          <select class="form-select" id="gender">
+            <option selected>female</option>
+            <option>male</option>
+            <option>other</option>
+          </select>
+        </div>
+
+        <!-- Ethnicity -->
         <div class="col-md-6 mb-3">
           <label class="form-label">Ethnicity</label>
           <input type="text" class="form-control" id="ethnicity" value="Indonesian">
         </div>
+
+        <!-- Expression -->
         <div class="col-md-6 mb-3">
           <label class="form-label">Expression</label>
           <input type="text" class="form-control" id="expression" value="serene and confident smile">
         </div>
+
+        <!-- Skin Tone -->
         <div class="col-md-6 mb-3">
-          <label class="form-label">Hijab Color</label>
-          <input type="text" class="form-control" id="hijabColor" value="white">
+          <label class="form-label">Skin Tone</label>
+          <select class="form-select" id="skinTone">
+            <option selected>fair</option>
+            <option>tan</option>
+            <option>olive</option>
+            <option>dark</option>
+            <option value="custom">Other</option>
+          </select>
+          <input type="text" class="form-control mt-2 d-none" id="customSkinTone" placeholder="Custom skin tone">
         </div>
+
+        <!-- Pose Description -->
         <div class="col-md-6 mb-3">
-          <label class="form-label">Headdress Description</label>
+          <label class="form-label">Pose / Viewpoint</label>
+          <input type="text" class="form-control" id="pose" value="slightly from the side">
+        </div>
+
+        <!-- Hijab -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Hijab Description</label>
+          <input type="text" class="form-control" id="hijab" value="white, fully covers hair">
+        </div>
+
+        <!-- Headdress -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Headdress</label>
           <input type="text" class="form-control" id="headdress" value="silver, intricate floral with towering vertical elements">
         </div>
+
+        <!-- Jasmine -->
         <div class="col-md-6 mb-3">
-          <label class="form-label">Makeup Description</label>
-          <input type="text" class="form-control" id="makeup" value="subtle eye makeup, peach lips, slight peach cheeks">
+          <label class="form-label">Jasmine Decoration</label>
+          <input type="text" class="form-control" id="jasmine" value="strands encircling face and shoulders">
         </div>
+
+        <!-- Dress -->
         <div class="col-md-6 mb-3">
-          <label class="form-label">Dress Details</label>
-          <input type="text" class="form-control" id="dress" value="white, shimmering silver sequins and beads">
+          <label class="form-label">Dress Description</label>
+          <input type="text" class="form-control" id="dress" value="white dress with silver sequins and beads">
         </div>
+
+        <!-- Makeup -->
         <div class="col-md-6 mb-3">
-          <label class="form-label">Background</label>
+          <label class="form-label">Makeup Details</label>
+          <input type="text" class="form-control" id="makeup" value="well groomed eyebrows, subtle eye makeup, peach lips, peach cheeks">
+        </div>
+
+        <!-- Hand Description -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Hand Position & Decoration</label>
+          <input type="text" class="form-control" id="hand" value="left hand raised, fingers slightly splayed, soft pink nail art, white henna, touching white wall">
+        </div>
+
+        <!-- Background -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Background Elements</label>
           <input type="text" class="form-control" id="background" value="soft white mosquito net, orchids with vases">
         </div>
+
+        <!-- Lighting -->
         <div class="col-md-6 mb-3">
-          <label class="form-label">Color Palette</label>
+          <label class="form-label">Lighting</label>
+          <input type="text" class="form-control" id="lighting" value="soft and even">
+        </div>
+
+        <!-- Color Palette -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Color Palette (comma separated)</label>
           <input type="text" class="form-control" id="palette" value="white, silver, wood tones, peach">
         </div>
       </div>
 
+      <!-- Generate & Copy Buttons -->
       <button type="button" class="btn btn-primary mt-2" onclick="generateJSON()">Generate JSON</button>
       <button type="button" class="btn btn-success mt-2 ms-2" onclick="copyJSON()">Copy to Clipboard</button>
     </form>
 
+    <!-- Output -->
     <h4 class="mt-4">Generated JSON:</h4>
     <textarea id="output" class="form-control" readonly></textarea>
   </div>
 
   <script>
+    // Show custom skin tone input if "Other" selected
+    document.getElementById('skinTone').addEventListener('change', function () {
+      const customInput = document.getElementById('customSkinTone');
+      customInput.classList.toggle('d-none', this.value !== 'custom');
+    });
+
     function generateJSON() {
+      const skinTone = document.getElementById('skinTone').value === 'custom'
+        ? document.getElementById('customSkinTone').value
+        : document.getElementById('skinTone').value;
+
       const json = {
         prompt: "Create a high detailing image",
         subject: {
           age: parseInt(document.getElementById('age').value),
           ethnicity: document.getElementById('ethnicity').value,
-          gender: "female",
+          gender: document.getElementById('gender').value,
+          skin_tone: skinTone,
           expression: document.getElementById('expression').value,
+          pose: document.getElementById('pose').value,
           attire: {
-            hijab: {
-              color: document.getElementById('hijabColor').value,
-              coverage: "fully covers hair"
-            },
-            headdress: {
-              type: document.getElementById('headdress').value
-            },
-            dress: {
-              description: document.getElementById('dress').value
-            },
+            hijab: document.getElementById('hijab').value,
+            headdress: document.getElementById('headdress').value,
+            jasmine: document.getElementById('jasmine').value,
+            dress: document.getElementById('dress').value,
             makeup: document.getElementById('makeup').value
-          }
+          },
+          hands: document.getElementById('hand').value
         },
         setting: {
           background: document.getElementById('background').value,
+          lighting: document.getElementById('lighting').value,
           color_palette: document.getElementById('palette').value.split(',').map(c => c.trim())
         },
         photography: {
           style: "photorealistic, cinematic",
           resolution: "high",
+          depth_of_field: "shallow (sharp face, soft bokeh background)",
           composition: {
             type: "symmetrical and balanced",
             framing: "centered",
@@ -108,7 +183,7 @@
       text.select();
       text.setSelectionRange(0, 99999);
       document.execCommand('copy');
-      alert("JSON copied to clipboard!");
+      alert("✅ JSON copied to clipboard!");
     }
   </script>
 </body>
